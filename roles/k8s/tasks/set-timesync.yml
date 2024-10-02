@@ -1,0 +1,21 @@
+---
+# For Debian 12, systemd-timesyncd will be disabled automatically once chrony is installed.
+# For ol8, chrony is shipped with OS.
+- name: Install chrony
+  ansible.builtin.package:
+    name: chrony
+    state: present
+
+- name: Configure chrony
+  ansible.builtin.template:
+    src: templates/chrony.conf.j2
+    dest: /etc/chrony.conf
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Ensure chrony is enabled and running
+  ansible.builtin.service:
+    name: chronyd
+    enabled: true
+    state: restarted

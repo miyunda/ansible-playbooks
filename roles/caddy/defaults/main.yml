@@ -1,0 +1,13 @@
+# Debian/Ubuntu only. Switch 'stable' to 'nightly' if needed.
+---
+# 我家就只有这两种
+cpu_arch: "{{ 'amd64' if ansible_architecture == 'x86_64' else 'arm64' }}"
+
+docker_apt_release_channel: stable
+docker_apt_repository: "deb [arch={{ cpu_arch }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} {{ docker_apt_release_channel }}"
+docker_apt_ignore_key_error: true
+docker_apt_gpg_key: "https://download.docker.com/linux/{{ ansible_distribution | lower }}/gpg"
+
+# To be one of "docker" group's members.
+docker_privileged_user: yu
+

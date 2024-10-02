@@ -1,0 +1,2 @@
+# Overwrite any existing containerd config.toml file.
+containerd_running_config_overwrite: true

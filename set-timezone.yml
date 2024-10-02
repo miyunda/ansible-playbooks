@@ -1,0 +1,26 @@
+- name: Ensure util-linux-extra package is installed (for Debian/Ubuntu)
+  ansible.builtin.apt:
+    name:
+      - util-linux-extra
+      - cron
+    state: present
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Set timezone to Asia/Macao
+  community.general.timezone:
+    name: Asia/Macao
+
+# Optional, if there were schedule tasks
+- name: Restart cron service on Debian/Ubuntu-based systems
+  ansible.builtin.systemd_service:
+    name: cron
+    state: restarted
+  when: ansible_facts['os_family'] == "Debian"
+  changed_when: false
+
+- name: Restart crond service on RedHat/CentOS-based systems
+  ansible.builtin.systemd_service:
+    name: crond
+    state: restarted
+  when: ansible_facts['os_family'] == "RedHat"
+  changed_when: false

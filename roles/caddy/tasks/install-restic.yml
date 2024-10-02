@@ -1,0 +1,6 @@
+# Optional, It is for sqlite database backup and restore
+- name: Install restic
+  ansible.builtin.apt:
+    name: restic
+    state: latest
+    update_cache: true

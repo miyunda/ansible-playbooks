@@ -1,0 +1,5 @@
+- name: Setup webservers with caddy role
+  hosts: web_servers
+  become: true
+  roles:
+    - caddy

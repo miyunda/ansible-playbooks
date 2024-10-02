@@ -1,0 +1,15 @@
+# VSCode
+.vscode
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+Thumbs.db
+db.json
+*.log
+*~
+node_modules/
+public/
+.deploy*/

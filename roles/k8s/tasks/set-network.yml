@@ -1,0 +1,45 @@
+---
+- name: Prepare kernel modules config
+  ansible.builtin.copy:
+    dest: /etc/modules-load.d/containerd.conf
+    content: |
+      overlay
+      br_netfilter
+    owner: root
+    group: root
+    mode: "0644"
+
+- name: Load above config
+  community.general.modprobe:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - overlay
+    - br_netfilter
+
+- name: Set ip forwarding on and reload if necessary
+  ansible.posix.sysctl:
+    name: net.ipv4.ip_forward
+    value: "1"
+    sysctl_file: /etc/sysctl.d/99-kubernetes-ipv4.conf
+    sysctl_set: true
+    state: present
+    reload: true
+
+- name: Set net bridge and reload if necessary
+  ansible.posix.sysctl:
+    name: net.bridge.bridge-nf-call-iptables
+    value: "1"
+    sysctl_file: /etc/sysctl.d/99-kubernetes-cri.conf
+    sysctl_set: true
+    state: present
+    reload: true
+
+- name: Set net bridge v6 on and reload if necessary
+  ansible.posix.sysctl:
+    name: net.bridge.bridge-nf-call-ip6tables
+    value: "1"
+    sysctl_file: /etc/sysctl.d/99-kubernetes-cri.conf
+    sysctl_set: true
+    state: present
+    reload: true

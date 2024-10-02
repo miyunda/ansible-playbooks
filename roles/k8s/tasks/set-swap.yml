@@ -1,0 +1,12 @@
+---
+- name: Remove swap mount
+  ansible.builtin.lineinfile:
+    dest: /etc/fstab
+    regexp: swap
+    state: absent
+
+- name: Unconditionally reboot the machine
+  ansible.builtin.reboot:
+  async: 300
+  poll: 10
+  when: ansible_swaptotal_mb > 0

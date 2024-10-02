@@ -1,0 +1,15 @@
+{
+acme_ca https://acme.zerossl.com/v2/DV90
+email   zerossl@miyunda.com
+}
+{{ caddy_title_url }} {
+  encode gzip
+  reverse_proxy  localhost:{{ caddy_title_port }}
+  log {
+    output file /var/log/caddy/{{ caddy_title_nickname }}/access.log {
+    roll_size 10mb
+    roll_keep 10
+    roll_keep_for 168h
+    }
+  }
+}

@@ -1,0 +1,24 @@
+---
+- name: Adjust networking parameters
+  ansible.builtin.include_tasks:
+    file: set-network.yml
+
+- name: Change timezone
+  ansible.builtin.include_tasks:
+    file: set-timezone.yml
+
+- name: Use my homelab's timeync
+  ansible.builtin.include_tasks:
+    file: set-timesync.yml
+
+- name: Disable swap
+  ansible.builtin.include_tasks:
+    file: set-swap.yml
+
+- name: Install containerd
+  ansible.builtin.include_tasks:
+    file: install-containerd.yml
+
+- name: Install kubeadm, kubelet and kubectl
+  ansible.builtin.include_tasks:
+    file: install-k8s.yml

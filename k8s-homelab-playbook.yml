@@ -1,0 +1,5 @@
+- name: Setup k8s with ansible role
+  hosts: k8s_homelab
+  become: true
+  roles:
+    - k8s

@@ -1,0 +1,18 @@
+# My 3 x64 servers in homelab
+k8s_homelab:
+  hosts:
+    k8s-[01:04].lab.miyunda.com:
+  vars:
+    ntp_server: 192.168.1.1
+
+# My 4 ARM servers in Oracle Cloud
+k8s_prod:
+  hosts:
+    k8s-sjc-[01:04].miyunda.com:
+  # Most cloud providers use metadata IP address to provide NTP service.
+  vars:
+    ntp_server: 169.254.169.254
+
+# My caddy servers
+web_servers:
+  hosts: web-hkg-405.miyunda.com

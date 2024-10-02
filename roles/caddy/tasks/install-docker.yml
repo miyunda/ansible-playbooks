@@ -1,0 +1,76 @@
+---
+- name: Install required system packages
+  ansible.builtin.apt:
+    pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - gnupg2
+    state: latest
+    update_cache: true
+
+- name: Prepare the key folder
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+    owner: root
+    group: root
+  changed_when: false
+
+- name: Introduce docker repository
+  block:
+    - name: Retrieve and dearmor docker apt key
+      ansible.builtin.get_url:
+        url: "{{ docker_apt_gpg_key }}"
+        dest: /etc/apt/keyrings/docker.asc
+        force: true
+
+    - name: Add docker repository
+      apt_repository:
+        repo: "{{ docker_apt_repository }}"
+        filename: /etc/apt/sources.list.d/docker
+        state: present
+
+- name: Update apt and install docker-ce
+  ansible.builtin.apt:
+    name:
+      - docker-ce
+      - docker-ce-cli
+      - docker-compose-plugin
+    state: latest
+    update_cache: true
+
+- name: Ensure docker group exists
+  ansible.builtin.group:
+    name: docker
+    state: present
+
+- name: Add my daily user to docker group
+  ansible.builtin.user:
+    name: "{{ docker_privileged_user }}"
+    groups: docker
+    append: true
+
+- name: Ensure docker config folder is there
+  ansible.builtin.file:
+    path: /etc/docker
+    state: directory
+    mode: "0755"
+    owner: root
+    group: root
+  changed_when: false
+
+- name: Configure docker
+  ansible.builtin.template:
+    src: templates/docker.conf.j2
+    dest: /etc/caddy/daemon.json
+    owner: root
+    group: root
+    mode: "0644"
+  notify: Restart docker
+
+- name: Autostart docker service
+  ansible.builtin.service:
+    name: docker
+    enabled: true
