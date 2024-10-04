@@ -35,7 +35,7 @@
 
 #### 用法
 编辑inventory文件还有[Kubernetes (on-prem) playbook](k8s-homelab-playbook.yml)。
-> ㊟ 不建议从macOS运行Ansible去运行远端的`dnf/yum`，这玩意的Python框架和macOS的不一样，运行不了。我被迫搞了个Linux虚机，用来运行Ansible，Docker什么的应该也行。
+> ㊟ 不建议从macOS运行Ansible去运行远端的`dnf/yum`，这玩意的Python框架和macOS的不一样，**有可能**运行不了。我被迫搞了个Linux虚机，用来运行Ansible，Docker什么的应该也行。
    在项目的根文件夹运行:
 
    ```bash
