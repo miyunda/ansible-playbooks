@@ -1,4 +1,6 @@
 # Ansible Playbooks
+[English](README.md) | [中文](README_zh-CN.md)
+
 This repository contains Ansible playbooks primarily for my homelab and cloud servers.
 
 ## Roles
