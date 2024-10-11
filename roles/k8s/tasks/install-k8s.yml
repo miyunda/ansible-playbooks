@@ -60,3 +60,21 @@
       - kubelet
       - kubectl
     state: present
+
+- name: Install socat
+  ansible.builtin.package:
+    name: socat
+    state: present
+    update_cache: true
+
+- name: Install tc for Debian
+  ansible.builtin.package:
+    name: iproute2
+    state: present
+  when: ansible_facts['os_family'] == "Debian"
+
+- name: Install tc for RedHat
+  ansible.builtin.package:
+    name: iproute-tc
+    state: present
+  when: ansible_facts['os_family'] == "RedHat"
