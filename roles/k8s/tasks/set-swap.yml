@@ -7,6 +7,4 @@
 
 - name: Unconditionally reboot the machine
   ansible.builtin.reboot:
-  async: 300
-  poll: 10
   when: ansible_swaptotal_mb > 0
