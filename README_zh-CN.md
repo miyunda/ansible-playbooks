@@ -44,7 +44,7 @@
 
 #### 任务
 - 确保对时服务都正常工作；编辑[inventory file](inventory.yml)以修改时间服务器上游。
-- 仅用磁盘交换。
+- 禁用磁盘交换。
 - 调整一些网络参数。
 - 安装containerd。
 - 安装Kubernetes御三家。.
