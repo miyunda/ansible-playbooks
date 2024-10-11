@@ -50,3 +50,4 @@ Edit the inventory file and the [Kubernetes (on-prem) playbook](k8s-homelab-play
 - Install containerd.
 - Install Kubernetes components.
 - Create a Kubernetes cluster and join nodes (TBD).
+- Set firewalld to allow k8s traffic. (OL8 only)

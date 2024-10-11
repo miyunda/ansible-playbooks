@@ -49,3 +49,4 @@
 - 安装containerd。
 - 安装Kubernetes御三家。.
 - 创建一个Kubernetes集群并加入节点，下次一定。
+- 给防火墙添加服务，允许k8s的流量。（只对OL8）
