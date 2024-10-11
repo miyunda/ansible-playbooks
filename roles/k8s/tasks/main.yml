@@ -22,3 +22,7 @@
 - name: Install kubeadm, kubelet and kubectl
   ansible.builtin.include_tasks:
     file: install-k8s.yml
+
+- name: Enable k8s traffic in firewalld
+  ansible.builtin.include_tasks:
+    file: set-firewalld.yml

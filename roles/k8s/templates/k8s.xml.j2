@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<service>
+  <short>k8s</short>
+  <description>Some are not needed but I still list them here.</description>
+  <port protocol="tcp" port="6443"/><!-- Kubernetes API server -->
+  <port protocol="tcp" port="2379-2380"/><!-- etcd server client API -->
+  <port protocol="tcp" port="10250"/><!-- Kubelet API -->
+  <port protocol="tcp" port="10256"/><!-- kube-proxy -->
+  <port protocol="tcp" port="10257"/><!-- kube-scheduler -->
+  <port protocol="tcp" port="10259"/><!-- kube-controller-manager -->
+  <port protocol="tcp" port="30000-32767"/><!-- NodePort Services† -->
+</service>

@@ -1,0 +1,32 @@
+---
+- name: Enable k8s traffic in firewalld
+  block:
+    - name: Introduce firewalld service definition for k8s
+      ansible.builtin.template:
+        src: templates/k8s.xml.j2
+        dest: /usr/lib/firewalld/services/k8s.xml
+        owner: root
+        group: root
+        mode: "0644"
+
+    - name: Pause for 5 seconds to allow firewalld to recognize the new service
+      ansible.builtin.pause:
+        seconds: 5
+
+    - name: Reload firewalld to recognize the new service
+      ansible.builtin.systemd_service:
+        name: firewalld
+        state: reloaded
+
+    - name: Permit trafic in default zone for the k8s service
+      ansible.posix.firewalld:
+        service: k8s
+        permanent: true
+        state: enabled
+
+    - name: Reload firewalld again
+      ansible.builtin.systemd_service:
+        name: firewalld
+        state: reloaded
+
+  when: ansible_facts['os_family'] == "RedHat"
