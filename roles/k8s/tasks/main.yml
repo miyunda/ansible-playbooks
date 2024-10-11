@@ -7,7 +7,7 @@
   ansible.builtin.include_tasks:
     file: set-timezone.yml
 
-- name: Use my homelab's timeync
+- name: Set timeync
   ansible.builtin.include_tasks:
     file: set-timesync.yml
 

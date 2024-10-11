@@ -1,0 +1,5 @@
+- name: Setup k8s on sjc servers
+  hosts: k8s_sjc
+  become: true
+  roles:
+    - k8s

@@ -6,7 +6,7 @@ k8s_homelab:
     ntp_server: 192.168.1.1
 
 # My 4 ARM servers in Oracle Cloud
-k8s_prod:
+k8s_sjc:
   hosts:
     k8s-sjc-[01:04].miyunda.com:
   # Most cloud providers use metadata IP address to provide NTP service.
